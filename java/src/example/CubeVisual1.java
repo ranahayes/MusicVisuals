@@ -33,7 +33,7 @@ public class CubeVisual1 extends Visual
     {
         background(0);
         calculateAverageAmplitude();
-        stroke(map(getSmoothedAmplitude(), 0, 1, 0, 255), 255, 255);
+        stroke(map(getSmothedAmplitude(), 0, 1, 0, 255), 255, 255);
         strokeWeight(5);
         noFill();
         lights();
@@ -43,7 +43,7 @@ public class CubeVisual1 extends Visual
         translate(0, 0, -200);
         rotateX(angle);
         rotateZ(angle);       
-        float boxSize = 50 + (200 * getSmoothedAmplitude()); 
+        float boxSize = 50 + (200 * getSmothedAmplitude()); 
         box(boxSize);   
         popMatrix();
         angle += 0.01f;

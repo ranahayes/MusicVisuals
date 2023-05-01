@@ -1,0 +1,11 @@
+{
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar",
+        "c:\\Users\\isado\\Downloads\\processing-4.2-windows-x64\\processing-4.2\\lib\\ant.jar",
+        "c:\\Users\\isado\\Downloads\\processing-4.2-windows-x64\\processing-4.2\\lib\\ant-launcher.jar",
+        "c:\\Users\\isado\\Downloads\\processing-4.2-windows-x64\\processing-4.2\\lib\\flatlaf.jar",
+        "c:\\Users\\isado\\Downloads\\processing-4.2-windows-x64\\processing-4.2\\lib\\jna.jar",
+        "c:\\Users\\isado\\Downloads\\processing-4.2-windows-x64\\processing-4.2\\lib\\jna-platform.jar",
+        "c:\\Users\\isado\\Downloads\\processing-4.2-windows-x64\\processing-4.2\\lib\\pde.jar"
+    ]
+}

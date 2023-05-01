@@ -2,6 +2,48 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Teste",
+            "request": "launch",
+            "mainClass": "ie.tudublin.Teste",
+            "projectName": "java"
+        },
+        {
+            "type": "java",
+            "name": "AudioVisual",
+            "request": "launch",
+            "mainClass": "ie.tudublin.AudioVisual",
+            "projectName": "java"
+        },
+        {
+            "type": "java",
+            "name": "ParasiteEveVisualizer",
+            "request": "launch",
+            "mainClass": "ie.tudublin.ParasiteEveVisualizer",
+            "projectName": "java"
+        },
+        {
+            "type": "java",
+            "name": "AudioWireframeLandscape",
+            "request": "launch",
+            "mainClass": "ie.tudublin.AudioWireframeLandscape",
+            "projectName": "java"
+        },
+        {
+            "type": "java",
+            "name": "Flower3D",
+            "request": "launch",
+            "mainClass": "ie.tudublin.Flower3D",
+            "projectName": "java"
+        },
+        {
+            "type": "java",
+            "name": "IsaVisual",
+            "request": "launch",
+            "mainClass": "ie.tudublin.IsaVisual",
+            "projectName": "java"
+        },
+        {
+            "type": "java",
             "name": "CodeLens (Launch) - Main",
             "request": "launch",
             "mainClass": "ie.tudublin.Main",
