@@ -1,6 +1,5 @@
-package c123456;
+package ie.tudublin;
 
-import ie.tudublin.*;
 import processing.core.PFont;
 
 public class Options extends Visual

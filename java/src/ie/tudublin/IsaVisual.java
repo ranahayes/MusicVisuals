@@ -1,6 +1,4 @@
-package c123456;
-
-import ie.tudublin.*;
+package ie.tudublin;
 
 class Branch {
 
