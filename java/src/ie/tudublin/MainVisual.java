@@ -1,5 +1,5 @@
 package ie.tudublin;
-//import example.*;
+//import examplec .*;
 
 public class MainVisual extends Visual
 {
