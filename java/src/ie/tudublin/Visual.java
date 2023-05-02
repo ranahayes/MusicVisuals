@@ -18,7 +18,7 @@ public abstract class Visual extends PApplet
 	public AudioPlayer ap;
 	private AudioBuffer ab;
 	public BeatDetect beat;
-	private FFT fft;
+	public FFT fft;
 
 	private float amplitude  = 0;
 	public float smothedAmplitude = 0;

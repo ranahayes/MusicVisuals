@@ -1,96 +1,113 @@
 package ie.tudublin;
 
-class Branch {
-
-    MainVisual mv;
-
-    float start;
-    float amplitude; 
-    float angle = 0;
-
-    Branch[] branches;
-
-    Branch(MainVisual mv,float start, float amplitude, float angle, int branches){
-
-        this.mv = mv;
-        this.start = start;
-        this.amplitude = amplitude;
-        this.angle = angle;
-
-        branch(branches); 
-    }
-
-    void display(){
-        
-        mv.rotate(this.angle);
-        mv.line(0, 0, 0, amplitude);
-
-        if(branches != null){
-            mv.translate(0, amplitude);
-            mv.pushMatrix();
-            branches[0].display();
-            mv.popMatrix();
-            branches[1].display();         
-        } 
-    } 
-
-    void branch(int numOfBranches){
-
-        if (numOfBranches > 0){
-        
-            branches = new Branch[2];
-            mv.branchCounter++;
-
-            float angle = MainVisual.map(mv.smothedAmplitude,0,1,3.14f/5f,3.14f/2f);
-            
-            branches[0] = new Branch(mv, start-amplitude, amplitude/1.5f, angle, numOfBranches-2);
-            branches[1] = new Branch(mv, start-amplitude, amplitude/1.5f, -angle, numOfBranches-2);
-        }
-    }
-}
+import ddf.minim.*;
+import processing.core.*;
+import ddf.minim.analysis.*;
 
 public class IsaVisual extends Visual {
 
-    MainVisual mv;
+    Minim minim;
+    AudioPlayer ap;
+    FFT fft;
 
     Branch branch1;
     Branch branch2;
 
-    public IsaVisual(MainVisual mv) {
-        this.mv = mv;
+    int counter = 0;
+    int branchCounter = 0;
+    
+    public void settings() {
+        size(1400, 800);
+        //size(1024, 500);
     }
 
-    public void draw() {
+    public void setup() {
+        minim = new Minim(this);
+        ap = minim.loadFile("Parasite.mp3");
+        ap.play();
+        fft = new FFT(ap.bufferSize(), ap.sampleRate());
+        colorMode(HSB);
+    }
 
-        mv.colorMode(MainVisual.HSB);
-        mv.strokeWeight(0.7f);
-        mv.fill(0,20);
-        mv.rect(-1, -1, mv.width+1, mv.height+1);
+    class Branch {
+        
+        private IsaVisual iv;
+        private float start;
+        private float amplitude;
+        private float angle = 0;
 
-        mv.counter++;
+        private Branch[] branches;
 
-        for( int i = 0; i < 9; i++ ){
-
-            mv.resetMatrix();
-            mv.translate(mv.width/2, mv.height/2);
-            mv.branchCounter = 0;
-
-            mv.rotate(MainVisual.map(mv.counter%360, 0, 360, 0, MainVisual.PI*1.5f));
-            mv.rotate(MainVisual.map((float)i, 0f, 6f, 0f, MainVisual.PI*1.5f));
-
-            branch1 = new Branch(mv, 0f, MainVisual.map(mv.smothedAmplitude,0,.6f,-mv.height/60f,-mv.height/3.5f), 0,14);
-            branch2 = new Branch(mv, 0f, MainVisual.map(mv.smothedAmplitude,0,.6f,-mv.height/60f,-mv.height/3.5f), 0,16);
-          
-            mv.fill((mv.counter/8)%255);
-            mv.stroke((mv.counter/8)%random(255));
-            branch1.display();
-
-            mv.fill((mv.counter/2)%255);
-            mv.stroke((mv.counter/2)%255,255,255);
-            branch2.display();
-
+        Branch(IsaVisual iv, float start, float amplitude, float angle, int branches) {
+            this.iv = iv;
+            this.start = start;
+            this.amplitude = amplitude;
+            this.angle = angle;
+            
+            branch(branches);
         }
 
+        void display() {
+            
+            iv.rotate(this.angle);
+            iv.line(0, 0, 0, amplitude);
+
+            if (branches != null) {
+                iv.translate(0, amplitude);
+                iv.pushMatrix();
+                branches[0].display();
+                iv.popMatrix();
+                branches[1].display();
+            }
+        }
+
+        void branch(int numOfBranches) {
+            
+            if (numOfBranches > 0) {
+                branches = new Branch[2];
+                iv.branchCounter++;
+
+                float angle = IsaVisual.map(iv.smothedAmplitude, 0, 1, 3.14f / 5f, 3.14f / 2f);
+
+                branches[0] = new Branch(iv, start - amplitude, amplitude / 1.5f, angle, numOfBranches - 2);
+                branches[1] = new Branch(iv, start - amplitude, amplitude / 1.5f, -angle, numOfBranches - 2);
+            }
+        }
+    }   
+      
+    public void draw() {
+        
+        background(0);
+        
+        strokeWeight(0.7f);
+        fill(0, 20);
+        rect(-1, -1, width + 1, height + 1);
+        fft.forward(ap.mix);
+        smothedAmplitude = lerp(smothedAmplitude, fft.getBand(200), 0.01f);
+        counter++;
+
+        for (int i = 0; i < 9; i++) {
+            resetMatrix();
+            translate(width / 2, height / 2);
+            branchCounter = 0;
+
+            rotate(map(counter % 360, 0, 360, 0, PI * 1.5f));
+            rotate(map((float) i, 0f, 6f, 0f, PI * 1.5f));
+
+            branch1 = new Branch(this, 0f, map(smothedAmplitude, 0, .6f, -height / 60f, -height / 3.5f), 0, 14);
+            branch2 = new Branch(this, 0f, map(smothedAmplitude, 0, .6f, -height / 60f, -height / 3.5f), 0, 16);
+
+            fill((counter / 8) % 255, 255, 255);
+            stroke((counter / 8) % random(255), 255, 255);
+            branch1.display();
+
+            fill((counter / 2) % 255);
+            stroke((counter / 2) % 255, 255, 255);
+            branch2.display();
+        }
     }
-    
+
+    public static void main(String[] args) {
+        PApplet.main("ie.tudublin.IsaVisual");
+    }
 }
