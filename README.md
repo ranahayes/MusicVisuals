@@ -6,8 +6,7 @@ Student Number: C21920856, D21125681, D21124013
 
 # Youtube Video
 
-https://youtu.be/6G2v33o0zi0
-
+[<img src="https://user-images.githubusercontent.com/77468140/236207396-6baf50d4-c29d-472f-be27-a043bb7d41ee.jpg" width="80%">](https://youtu.be/6G2v33o0zi0)
 
 # Description of the assignment
 
