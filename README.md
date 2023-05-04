@@ -28,8 +28,6 @@ The assignment combines four visual effects: Mountain Landscape, Particles, Cube
 
 # Instructions
 
-## Main Menu
-
 ## Ceren's Visual
 Import the Minim library.
 Extend the CerensSongVisualizer class from PApplet.
